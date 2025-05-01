@@ -10,6 +10,9 @@ import android.widget.DatePicker;
 import androidx.annotation.Nullable;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class ScheduleDB  {
 
@@ -74,9 +77,16 @@ public class ScheduleDB  {
         return db.insert(DATABASE_TABLE,null,cv);
     }
 
-    public String pasttasks(){
-        String[] columns = new String[]{ROW_ID, ROW_TITLE, ROW_DESC, ROW_DATE, ROW_TIME,ROW_STATUS};
-        Cursor c = db.query(DATABASE_TABLE, columns, null, null, null, null, null);
+    public String pasttasks() {
+        String[] columns = new String[]{ROW_ID, ROW_TITLE, ROW_DESC, ROW_DATE, ROW_TIME, ROW_STATUS};
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+        String currentDateTime = dateFormat.format(new Date());
+
+        // Corrected column reference for SQLite query
+        String selection = "datetime(" + ROW_DATE + " || ' ' || " + ROW_TIME + ") < datetime(?)";
+        String[] selectionArgs = new String[]{currentDateTime};
+
+        Cursor c = db.query(DATABASE_TABLE, columns, selection, selectionArgs, null, null, null);
         if (c != null && c.moveToFirst()) {
             StringBuilder result = new StringBuilder();
 
@@ -93,7 +103,6 @@ public class ScheduleDB  {
                 String time = c.getString(indexTime);
                 String status = c.getString(indexStatus);
 
-
                 result.append("\n")
                         .append("Title: ").append(title).append("\n")
                         .append("Description: ").append(desc).append("\n")
@@ -109,6 +118,7 @@ public class ScheduleDB  {
 
         return "No data found";
     }
+
     public void insertSampleData(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
 

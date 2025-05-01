@@ -5,4 +5,5 @@
     <string name="no_past_activities_available">No past activities available</string>
     <string name="past_activities">PAST ACTIVITIES</string>
     <string name="create_a_new_task">Create a New Task</string>
+    <string name="notifications">Notifications</string>
 </resources>
