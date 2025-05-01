@@ -1,16 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#EDE7F6"
+    android:gravity="center_vertical"
+    android:paddingTop="40dp"
     tools:context=".ScheduleFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Schedule Tab" />
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create a New Task"
+        android:textSize="24sp"
+        android:textColor="#6A1B9A"
+        android:layout_gravity="center"
+        android:layout_marginBottom="24dp"
+        android:textStyle="bold"/>
+
+
+    <EditText
+        android:id="@+id/taskTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Task Title"
+        android:textColor="#6A1B9A"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp"
+        android:inputType="text"/>
+
+
+    <EditText
+        android:id="@+id/taskDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Task Description"
+        android:textColor="#6A1B9A"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp"
+        android:inputType="textMultiLine"/>
+
+
+    <EditText
+        android:id="@+id/taskDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Select Date"
+        android:textColor="#6A1B9A"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp"
+        android:inputType="date"/>
+
+
+    <EditText
+        android:id="@+id/taskTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Select Time"
+        android:textColor="#6A1B9A"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp"
+        android:inputType="time"/>
+
+    <EditText
+        android:id="@+id/taskStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Task Status"
+        android:textColor="#6A1B9A"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="24dp"
+        android:inputType="text"/>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Task"
+        android:textColor="#fff"
+        android:background="@color/purple"
+        android:textSize="16sp"
+        android:padding="14dp"
+        android:layout_marginBottom="24dp"/>
+</LinearLayout>
