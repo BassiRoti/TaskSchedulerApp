@@ -1,48 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
-
     <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpagerid"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:id="@+id/viewpagerid"
-        >
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tabid" />
 
-    </androidx.viewpager2.widget.ViewPager2>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/relative_id"
-        >
-        <com.google.android.material.tabs.TabLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tabid"
-            app:tabSelectedTextColor="@color/purple"
-            app:tabIndicatorColor="@color/pink"
-            app:tabIndicatorAnimationMode="elastic"
-            app:tabTextColor="@color/black"
-            android:layout_alignParentBottom="true"
-            >
-
-
-
-        </com.google.android.material.tabs.TabLayout>
-
-    </RelativeLayout>
-
-
-
-
-
-</LinearLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        app:tabSelectedTextColor="@color/purple"
+        app:tabIndicatorColor="@color/pink"
+        app:tabIndicatorAnimationMode="elastic"
+        app:tabTextColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

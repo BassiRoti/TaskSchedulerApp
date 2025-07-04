@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import androidx.appcompat.app.AppCompatDelegate;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -115,25 +116,11 @@ private void init(){
             editor.putBoolean("ptheme", isChecked);
             editor.apply();
 
-            if (isChecked) {
-                // Apply dark theme
-                ly.setBackgroundColor(0xFF121212);
-                name.setBackgroundColor(0xFF333333);
-                email.setBackgroundColor(0xFF333333);
-                name.setTextColor(0xFFFFFFFF);
-                email.setTextColor(0xFFFFFFFF);
-                sw.setTextColor(0xFFFFFFFF);
-                editbtn.setBackgroundColor(0xFF6A1B9A);
-            } else {
-                // Apply light theme
-                ly.setBackgroundColor(0xFFFFFFFF);
-                name.setBackgroundColor(0xFFFFFFFF);
-                email.setBackgroundColor(0xFFFFFFFF);
-                name.setTextColor(0xFF000000);
-                email.setTextColor(0xFF000000);
-                sw.setTextColor(0xFF000000);
-                editbtn.setBackgroundColor(0xFF6A1B9A);
-            }
+            AppCompatDelegate.setDefaultNightMode(isChecked ?
+                    AppCompatDelegate.MODE_NIGHT_YES :
+                    AppCompatDelegate.MODE_NIGHT_NO);
+
+            requireActivity().recreate();
         });
 
 

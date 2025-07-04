@@ -20,7 +20,7 @@ import android.widget.Toast;
  */
 public class ScheduleFragment extends Fragment {
 
-    EditText etname,etdesc,etdate,etttime,etstatus;
+    EditText etname,etdesc,etdate,etttime,etstatus,taskcat;
     Button btn;
 
     View v;
@@ -31,6 +31,7 @@ public class ScheduleFragment extends Fragment {
         etdate=v.findViewById(R.id.taskDate);
         etttime=v.findViewById(R.id.taskTime);
         etstatus=v.findViewById(R.id.taskStatus);
+        taskcat=v.findViewById(R.id.taskcat);
         btn=v.findViewById(R.id.saveButton);
     }
 
@@ -54,10 +55,11 @@ public class ScheduleFragment extends Fragment {
                 String recdate=etdate.getText().toString().trim();
                 String rectime=etttime.getText().toString().trim();
                 String recstatus=etstatus.getText().toString().trim();
+                String cat=taskcat.getText().toString().trim();
 
                 ScheduleDB db=new ScheduleDB(requireContext());
                 db.open();
-                db.addschedule(recname,recdesc,recdate,rectime,recstatus);
+                db.addschedule(recname,recdesc,recdate,rectime,recstatus,cat);
                 Toast.makeText(requireContext(), "Saved successfully", Toast.LENGTH_SHORT).show();
                 db.close();
             }

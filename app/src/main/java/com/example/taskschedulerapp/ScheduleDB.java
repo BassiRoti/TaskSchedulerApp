@@ -25,6 +25,8 @@ public class ScheduleDB  {
     public static String ROW_DATE="_date";
     public static String ROW_TIME="_time";
     public static String ROW_STATUS="_status";
+    public static String ROW_CATEGORY = "_category";
+
 
     public Context context;
 
@@ -40,18 +42,21 @@ public class ScheduleDB  {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            String query="CREATE TABLE "+DATABASE_TABLE+" ("+
-                    ROW_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ROW_TITLE+" TEXT NOT NULL, "+ROW_DESC+" TEXT NOT NULL, "
-                    +ROW_DATE+" TEXT NOT NULL, "+ROW_TIME+" TEXT NOT NULL, " +ROW_STATUS+" INTEGER NOT NULL);";
-
+            String query = "CREATE TABLE " + DATABASE_TABLE + " (" +
+                    ROW_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    ROW_TITLE + " TEXT NOT NULL, " +
+                    ROW_DESC + " TEXT NOT NULL, " +
+                    ROW_DATE + " TEXT NOT NULL, " +
+                    ROW_TIME + " TEXT NOT NULL, " +
+                    ROW_STATUS + " TEXT NOT NULL, " +
+                    ROW_CATEGORY + " TEXT);";
             db.execSQL(query);
             insertSampleData(db);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS "+DATABASE_TABLE);
-            onCreate(db);
+            db.execSQL("ALTER TABLE " + DATABASE_TABLE + " ADD COLUMN " + ROW_CATEGORY + " TEXT");
         }
     }
 
@@ -74,6 +79,16 @@ public class ScheduleDB  {
         cv.put(ROW_DATE,date);
         cv.put(ROW_TIME,time);
         cv.put(ROW_STATUS,status);
+        return db.insert(DATABASE_TABLE,null,cv);
+    }
+    public long addschedule(String title, String desc, String date, String time, String status, String category){
+        ContentValues cv=new ContentValues();
+        cv.put(ROW_TITLE,title);
+        cv.put(ROW_DESC,desc);
+        cv.put(ROW_DATE,date);
+        cv.put(ROW_TIME,time);
+        cv.put(ROW_STATUS,status);
+        cv.put(ROW_CATEGORY, category);
         return db.insert(DATABASE_TABLE,null,cv);
     }
 
@@ -146,6 +161,35 @@ public class ScheduleDB  {
         values.put(ROW_STATUS, "In Progress");
         db.insert(DATABASE_TABLE, null, values);
     }
+
+    public int updateTask(int id, String title, String desc, String date, String time, String status, String category) {
+        ContentValues cv = new ContentValues();
+        cv.put(ROW_TITLE, title);
+        cv.put(ROW_DESC, desc);
+        cv.put(ROW_DATE, date);
+        cv.put(ROW_TIME, time);
+        cv.put(ROW_STATUS, status);
+        cv.put(ROW_CATEGORY, category);
+        return db.update(DATABASE_TABLE, cv, ROW_ID + "=?", new String[]{String.valueOf(id)});
+    }
+
+    public void deleteTask(int id) {
+        db.delete(DATABASE_TABLE, ROW_ID + "=?", new String[]{String.valueOf(id)});
+    }
+
+    public void markAsCompleted(int id) {
+        ContentValues cv = new ContentValues();
+        cv.put(ROW_STATUS, "Completed");
+        db.update(DATABASE_TABLE, cv, ROW_ID + "=?", new String[]{String.valueOf(id)});
+    }
+
+
+    public Cursor getPastTasksCursor() {
+        return db.query(DATABASE_TABLE, null, null, null, null, null, ROW_DATE + " DESC");
+    }
+
+
+
 
 
 
