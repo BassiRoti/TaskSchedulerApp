@@ -18,6 +18,9 @@ public class PastTabFragment extends Fragment {
     RecyclerView pastRecycler;
     View v;
 
+    ScheduleDB db;
+    TaskAdapter adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -25,18 +28,30 @@ public class PastTabFragment extends Fragment {
         return v;
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        load(); // refresh tasks every time fragment becomes visible
+    }
+
+    private void load() {
+        Cursor cursor = db.getPastTasksCursor();
+        adapter.reload(cursor);
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        db = new ScheduleDB(requireContext());
+        db.open();
+
         pastRecycler = v.findViewById(R.id.pastRecycler);
         pastRecycler.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        ScheduleDB db = new ScheduleDB(requireContext());
-        db.open();
-        Cursor cursor = db.getPastTasksCursor();
-        TaskAdapter adapter = new TaskAdapter(requireContext(), cursor, db);
-
+        adapter = new TaskAdapter(requireContext(), db.getPastTasksCursor(), db);
         pastRecycler.setAdapter(adapter);
-//        db.close();
     }
+
 }

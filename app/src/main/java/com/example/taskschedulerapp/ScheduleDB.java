@@ -49,9 +49,8 @@ public class ScheduleDB  {
                     ROW_DATE + " TEXT NOT NULL, " +
                     ROW_TIME + " TEXT NOT NULL, " +
                     ROW_STATUS + " TEXT NOT NULL, " +
-                    ROW_CATEGORY + " TEXT);";
+                    ROW_CATEGORY + " TEXT NOT NULL);";
             db.execSQL(query);
-            insertSampleData(db);
         }
 
         @Override
@@ -134,33 +133,33 @@ public class ScheduleDB  {
         return "No data found";
     }
 
-    public void insertSampleData(SQLiteDatabase db) {
-        ContentValues values = new ContentValues();
-
-        values.put(ROW_ID, 1);
-        values.put(ROW_TITLE, "Task 1");
-        values.put(ROW_DESC, "Description 1");
-        values.put(ROW_DATE, "2025-04-28");
-        values.put(ROW_TIME, "10:00");
-        values.put(ROW_STATUS, "Pending");
-        db.insert(DATABASE_TABLE, null, values);
-
-        values.put(ROW_ID, 2);
-        values.put(ROW_TITLE, "Task 2");
-        values.put(ROW_DESC, "Description 2");
-        values.put(ROW_DATE, "2025-05-01");
-        values.put(ROW_TIME, "09:00");
-        values.put(ROW_STATUS, "Completed");
-        db.insert(DATABASE_TABLE, null, values);
-
-        values.put(ROW_ID, 3);
-        values.put(ROW_TITLE, "Task 3");
-        values.put(ROW_DESC, "Description 3");
-        values.put(ROW_DATE, "2025-04-30");
-        values.put(ROW_TIME, "15:30");
-        values.put(ROW_STATUS, "In Progress");
-        db.insert(DATABASE_TABLE, null, values);
-    }
+//    public void insertSampleData(SQLiteDatabase db) {
+//        ContentValues values = new ContentValues();
+//
+//        values.put(ROW_ID, 1);
+//        values.put(ROW_TITLE, "Task 1");
+//        values.put(ROW_DESC, "Description 1");
+//        values.put(ROW_DATE, "2025-04-28");
+//        values.put(ROW_TIME, "10:00");
+//        values.put(ROW_STATUS, "Pending");
+//        db.insert(DATABASE_TABLE, null, values);
+//
+//        values.put(ROW_ID, 2);
+//        values.put(ROW_TITLE, "Task 2");
+//        values.put(ROW_DESC, "Description 2");
+//        values.put(ROW_DATE, "2025-05-01");
+//        values.put(ROW_TIME, "09:00");
+//        values.put(ROW_STATUS, "Completed");
+//        db.insert(DATABASE_TABLE, null, values);
+//
+//        values.put(ROW_ID, 3);
+//        values.put(ROW_TITLE, "Task 3");
+//        values.put(ROW_DESC, "Description 3");
+//        values.put(ROW_DATE, "2025-04-30");
+//        values.put(ROW_TIME, "15:30");
+//        values.put(ROW_STATUS, "In Progress");
+//        db.insert(DATABASE_TABLE, null, values);
+//    }
 
     public int updateTask(int id, String title, String desc, String date, String time, String status, String category) {
         ContentValues cv = new ContentValues();
