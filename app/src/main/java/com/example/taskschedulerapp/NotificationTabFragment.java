@@ -11,33 +11,49 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NotificationTabFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class NotificationTabFragment extends Fragment {
 
     TextView tvnoti;
     View v;
-    private void init(){
-        tvnoti=v.findViewById(R.id.notiid);
+    NotificationsDB db; // Global db instance
+
+    private void init() {
+        tvnoti = v.findViewById(R.id.notiid);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        v=inflater.inflate(R.layout.fragment_notification_tab, container, false);
+        v = inflater.inflate(R.layout.fragment_notification_tab, container, false);
         return v;
+    }
+
+    private void load() {
+        if (db != null) {
+            tvnoti.setText(db.getAllNotifications());
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        load(); // will now work — because db is initialized in onViewCreated()
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         init();
-        NotificationsDB db=new NotificationsDB(requireContext());
+
+        db = new NotificationsDB(requireContext());
         db.open();
-        tvnoti.setText(db.getallnotifications());
-        db.close();
+
+        load(); // Load initial data
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (db != null) db.close();
     }
 }

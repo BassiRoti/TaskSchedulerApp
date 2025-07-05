@@ -18,6 +18,7 @@ public class NotificationsDB {
     public static String ROW_MESSAGE="_message";
     public static String ROW_DATE="_date";
     public static String ROW_TIME="_time";
+    public static String ROW_TASK_ID = "_task_id";
 
     public Context context;
 
@@ -33,12 +34,15 @@ public class NotificationsDB {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            String query="CREATE TABLE "+DATABASE_TABLE+" ("+
-                    ROW_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ROW_MESSAGE+" TEXT NOT NULL, "
-                    +ROW_DATE+" TEXT NOT NULL, "+ROW_TIME+" TEXT NOT NULL " +");";
-
+            String query = "CREATE TABLE " + DATABASE_TABLE + " (" +
+                    ROW_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    ROW_MESSAGE + " TEXT NOT NULL, " +
+                    ROW_DATE + " TEXT NOT NULL, " +
+                    ROW_TIME + " TEXT NOT NULL, " +
+                    ROW_TASK_ID + " INTEGER, " +
+                    "FOREIGN KEY(" + ROW_TASK_ID + ") REFERENCES ScheduleTable(_id)" +
+                    ");";
             db.execSQL(query);
-            insertHardcodedData(db);
         }
 
         @Override
@@ -60,46 +64,41 @@ public class NotificationsDB {
         notihelper.close();
     }
 
-    private void insertHardcodedData(SQLiteDatabase db) {
+    public long addNotification(String message, String date, String time, int taskId) {
+        ContentValues cv = new ContentValues();
+        cv.put(ROW_MESSAGE, message);
+        cv.put(ROW_DATE, date);
+        cv.put(ROW_TIME, time);
+        cv.put(ROW_TASK_ID, taskId);
+        return db.insert(DATABASE_TABLE, null, cv);
+    }
+
+    public void insertNotification(String message, String date, String time) {
         ContentValues values = new ContentValues();
-
-        values.put(ROW_MESSAGE, "Meeting with Team");
-        values.put(ROW_DATE, "2025-05-01");
-        values.put(ROW_TIME, "10:00 AM");
-        db.insert(DATABASE_TABLE, null, values);
-
-        values.put(ROW_MESSAGE, "Submit Project Report");
-        values.put(ROW_DATE, "2025-05-02");
-        values.put(ROW_TIME, "03:00 PM");
-        db.insert(DATABASE_TABLE, null, values);
-
-        values.put(ROW_MESSAGE, "Call with Client");
-        values.put(ROW_DATE, "2025-05-03");
-        values.put(ROW_TIME, "11:30 AM");
+        values.put(ROW_MESSAGE, message);
+        values.put(ROW_DATE, date);
+        values.put(ROW_TIME, time);
         db.insert(DATABASE_TABLE, null, values);
     }
 
-    public String getallnotifications(){
-        String[] columns = new String[]{ROW_ID, ROW_MESSAGE, ROW_DATE, ROW_TIME};
+
+    public String getAllNotifications() {
+        String[] columns = new String[]{ROW_ID, ROW_MESSAGE, ROW_DATE, ROW_TIME, ROW_TASK_ID};
         Cursor c = db.query(DATABASE_TABLE, columns, null, null, null, null, null);
         if (c != null && c.moveToFirst()) {
             StringBuilder result = new StringBuilder();
 
-            int indexID = c.getColumnIndex(ROW_ID);
             int indexMessage = c.getColumnIndex(ROW_MESSAGE);
             int indexDate = c.getColumnIndex(ROW_DATE);
             int indexTime = c.getColumnIndex(ROW_TIME);
 
             do {
-                int id = c.getInt(indexID);
                 String message = c.getString(indexMessage);
                 String date = c.getString(indexDate);
-                double time = c.getDouble(indexTime);
+                String time = c.getString(indexTime);
 
-                result.append("\n")
-                        .append("Message: ").append(message).append("\n")
-                        .append("Date: ").append(date).append("\n")
-                        .append("Time: ").append(time).append("\n")
+                result.append("Message: ").append(message).append("\n")
+                        .append("Date: ").append(date).append(" | Time: ").append(time)
                         .append("\n----------------------------\n");
             } while (c.moveToNext());
 
@@ -107,8 +106,9 @@ public class NotificationsDB {
             return result.toString();
         }
 
-        return "No data found";
-}
+        return "No notifications";
+    }
+
 
 
 

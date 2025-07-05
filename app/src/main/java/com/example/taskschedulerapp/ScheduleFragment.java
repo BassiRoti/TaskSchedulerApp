@@ -99,7 +99,7 @@ public class ScheduleFragment extends Fragment {
 
                 ScheduleDB db = new ScheduleDB(requireContext());
                 db.open();
-                db.addschedule(recname, recdesc, recdate, rectime, recstatus, cat);
+                long taskId=db.addschedule(recname, recdesc, recdate, rectime, recstatus, cat);
                 db.close();
 
                 Toast.makeText(requireContext(), "Saved successfully", Toast.LENGTH_SHORT).show();
@@ -111,6 +111,14 @@ public class ScheduleFragment extends Fragment {
                 etttime.setText("");
                 etstatus.setText("");
                 taskcat.setText("");
+
+                NotificationsDB notificationsDB = new NotificationsDB(requireContext());
+                notificationsDB.open();
+                notificationsDB.addNotification("Upcoming: " + recname, recdate, rectime, (int) taskId);
+                notificationsDB.close();
+
+                Toast.makeText(requireContext(), "Saved successfully", Toast.LENGTH_SHORT).show();
+                db.close();
             }
         });
 

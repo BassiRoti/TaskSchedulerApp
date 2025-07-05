@@ -8,6 +8,8 @@
     android:background="#F3E5F5"
     tools:context=".PastTabFragment">
 
+
+
     <!-- Title -->
     <TextView
         android:layout_width="wrap_content"
@@ -26,6 +28,33 @@
         android:layout_height="2dp"
         android:layout_marginBottom="12dp"
         android:background="#BA68C8" />
+
+    <LinearLayout
+        android:id="@+id/filterLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <Spinner
+            android:id="@+id/categorySpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/dateFilter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="yyyy-MM-dd"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/filterButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filter" />
+    </LinearLayout>
 
     <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -90,6 +91,26 @@ public class ScheduleDB  {
         cv.put(ROW_CATEGORY, category);
         return db.insert(DATABASE_TABLE,null,cv);
     }
+
+    public Cursor getFilteredTasks(String category, String beforeDate) {
+        String selection = "";
+        ArrayList<String> argsList = new ArrayList<>();
+
+        if (!category.equalsIgnoreCase("All")) {
+            selection += ROW_CATEGORY + " = ?";
+            argsList.add(category);
+        }
+
+        if (!beforeDate.isEmpty()) {
+            if (!selection.isEmpty()) selection += " AND ";
+            selection += ROW_DATE + " <= ?";
+            argsList.add(beforeDate);
+        }
+
+        String[] selectionArgs = argsList.toArray(new String[0]);
+        return db.query(DATABASE_TABLE, null, selection, selectionArgs, null, null, ROW_DATE + " ASC");
+    }
+
 
     public String pasttasks() {
         String[] columns = new String[]{ROW_ID, ROW_TITLE, ROW_DESC, ROW_DATE, ROW_TIME, ROW_STATUS};
