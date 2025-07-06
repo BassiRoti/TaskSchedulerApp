@@ -45,7 +45,6 @@ private void init(){
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         v= inflater.inflate(R.layout.fragment_profile_tab, container, false);
         return v;
     }
@@ -58,32 +57,32 @@ private void init(){
 
         String sname = sp.getString("pname", "Default Name");
         String semail = sp.getString("pemail", "Default Email");
-        boolean isDarkMode = sp.getBoolean("ptheme", false);
+//        boolean isDarkMode = sp.getBoolean("ptheme", false);
 
         name.setText(sname);
         email.setText(semail);
-        sw.setChecked(isDarkMode);
+//        sw.setChecked(isDarkMode);
         name.setEnabled(false);
         email.setEnabled(false);
-        sw.setChecked(isDarkMode);
+//        sw.setChecked(isDarkMode);
 
-        if (isDarkMode) {
-            ly.setBackgroundColor(0xFF121212);
-            name.setBackgroundColor(0xFF333333);
-            email.setBackgroundColor(0xFF333333);
-            name.setTextColor(0xFFFFFFFF);
-            email.setTextColor(0xFFFFFFFF);
-            sw.setTextColor(0xFFFFFFFF);
-            editbtn.setBackgroundColor(0xFF6A1B9A);
-        } else {
-            ly.setBackgroundColor(0xFFFFFFFF);
-            name.setBackgroundColor(0xFFFFFFFF);
-            email.setBackgroundColor(0xFFFFFFFF);
-            name.setTextColor(0xFF000000);
-            email.setTextColor(0xFF000000);
-            sw.setTextColor(0xFF000000);
-            editbtn.setBackgroundColor(0xFF6A1B9A);
-        }
+//        if (isDarkMode) {
+//            ly.setBackgroundColor(0xFF121212);
+//            name.setBackgroundColor(0xFF333333);
+//            email.setBackgroundColor(0xFF333333);
+//            name.setTextColor(0xFFFFFFFF);
+//            email.setTextColor(0xFFFFFFFF);
+//            sw.setTextColor(0xFFFFFFFF);
+//            editbtn.setBackgroundColor(0xFF6A1B9A);
+//        } else {
+//            ly.setBackgroundColor(0xFFFFFFFF);
+//            name.setBackgroundColor(0xFFFFFFFF);
+//            email.setBackgroundColor(0xFFFFFFFF);
+//            name.setTextColor(0xFF000000);
+//            email.setTextColor(0xFF000000);
+//            sw.setTextColor(0xFF000000);
+//            editbtn.setBackgroundColor(0xFF6A1B9A);
+//        }
 
         editbtn.setOnClickListener(new View.OnClickListener() {
             @Override

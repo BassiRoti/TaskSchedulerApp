@@ -15,7 +15,7 @@ public class NotificationTabFragment extends Fragment {
 
     TextView tvnoti;
     View v;
-    NotificationsDB db; // Global db instance
+    NotificationsDB db;
 
     private void init() {
         tvnoti = v.findViewById(R.id.notiid);
@@ -37,7 +37,7 @@ public class NotificationTabFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        load(); // will now work — because db is initialized in onViewCreated()
+        load();
     }
 
     @Override
@@ -48,7 +48,7 @@ public class NotificationTabFragment extends Fragment {
         db = new NotificationsDB(requireContext());
         db.open();
 
-        load(); // Load initial data
+        load();
     }
 
     @Override

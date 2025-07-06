@@ -42,7 +42,6 @@ public class ScheduleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         v= inflater.inflate(R.layout.fragment_schedule, container, false);
         return v;
     }
@@ -104,7 +103,6 @@ public class ScheduleFragment extends Fragment {
 
                 Toast.makeText(requireContext(), "Saved successfully", Toast.LENGTH_SHORT).show();
 
-                // Optionally, clear inputs after saving
                 etname.setText("");
                 etdesc.setText("");
                 etdate.setText("");

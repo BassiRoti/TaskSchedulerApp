@@ -8,7 +8,6 @@
     android:id="@+id/ly"
     tools:context=".ProfileTabFragment">
 
-    <!-- Profile Picture -->
     <ImageView
         android:id="@+id/profilePicture"
         android:layout_width="120dp"
@@ -20,7 +19,6 @@
         android:padding="4dp"
         android:layout_marginBottom="16dp" />
 
-    <!-- Name Input -->
     <EditText
         android:id="@+id/displayName"
         android:layout_width="match_parent"
@@ -34,7 +32,6 @@
         android:inputType="textPersonName"
         android:layout_marginBottom="16dp" />
 
-    <!-- Email Input -->
     <EditText
         android:id="@+id/displayEmail"
         android:layout_width="match_parent"
@@ -47,7 +44,6 @@
         android:inputType="textEmailAddress"
         android:layout_marginBottom="16dp" />
 
-    <!-- Dark Mode Toggle -->
     <Switch
         android:id="@+id/themeToggle"
         android:layout_width="wrap_content"
@@ -56,7 +52,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="16dp" />
 
-    <!-- Edit Button -->
     <Button
         android:id="@+id/editButton"
         android:layout_width="match_parent"

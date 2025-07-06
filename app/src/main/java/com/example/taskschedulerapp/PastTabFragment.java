@@ -39,7 +39,7 @@ public class PastTabFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        load(); // refresh tasks every time fragment becomes visible
+        load();
     }
 
     private void load() {
@@ -64,7 +64,6 @@ public class PastTabFragment extends Fragment {
         dateFilter = v.findViewById(R.id.dateFilter);
         filterButton = v.findViewById(R.id.filterButton);
 
-        // Add sample categories or fetch from DB
         String[] categories = {"All", "Work", "Personal", "Learning"};
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item, categories);
         categorySpinner.setAdapter(spinnerAdapter);

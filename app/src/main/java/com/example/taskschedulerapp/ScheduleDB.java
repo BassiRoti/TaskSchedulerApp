@@ -117,7 +117,6 @@ public class ScheduleDB  {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
         String currentDateTime = dateFormat.format(new Date());
 
-        // Corrected column reference for SQLite query
         String selection = "datetime(" + ROW_DATE + " || ' ' || " + ROW_TIME + ") < datetime(?)";
         String[] selectionArgs = new String[]{currentDateTime};
 

@@ -8,7 +8,6 @@
     android:background="#F5F3FF"
     android:elevation="3dp">
 
-    <!-- Optional Category Header -->
     <TextView
         android:id="@+id/itemCategoryHeader"
         android:layout_width="match_parent"
@@ -20,7 +19,6 @@
         android:textSize="16sp"
         android:visibility="gone" />
 
-    <!-- Title -->
     <TextView
         android:id="@+id/itemTitle"
         android:layout_width="match_parent"
@@ -32,7 +30,6 @@
         android:paddingTop="4dp"
         android:paddingBottom="2dp" />
 
-    <!-- Description -->
     <TextView
         android:id="@+id/itemDesc"
         android:layout_width="match_parent"
@@ -42,7 +39,6 @@
         android:textSize="15sp"
         android:paddingBottom="2dp" />
 
-    <!-- Date & Time -->
     <TextView
         android:id="@+id/itemDateTime"
         android:layout_width="match_parent"
@@ -52,7 +48,6 @@
         android:textSize="14sp"
         android:paddingBottom="2dp" />
 
-    <!-- Status -->
     <TextView
         android:id="@+id/itemStatus"
         android:layout_width="match_parent"
@@ -62,7 +57,6 @@
         android:textSize="14sp"
         android:paddingBottom="2dp" />
 
-    <!-- Category -->
     <TextView
         android:id="@+id/itemCategory"
         android:layout_width="match_parent"
@@ -72,7 +66,6 @@
         android:textSize="14sp"
         android:paddingBottom="8dp" />
 
-    <!-- Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

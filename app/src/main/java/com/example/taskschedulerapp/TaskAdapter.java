@@ -127,11 +127,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         holder.btnUpdate.setOnClickListener(v -> {
             Task taskToEdit = tasks.get(position);
 
-            // Create a simple AlertDialog for editing
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Update Task");
-
-            // Create layout
             LinearLayout layout = new LinearLayout(context);
             layout.setOrientation(LinearLayout.VERTICAL);
             layout.setPadding(20, 20, 20, 20);
@@ -178,7 +175,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
                 db.updateTask(taskToEdit.id, newTitle, newDesc, newDate, newTime, newStatus, newCategory);
 
-                // Update the local object
                 taskToEdit.title = newTitle;
                 taskToEdit.desc = newDesc;
                 taskToEdit.date = newDate;
